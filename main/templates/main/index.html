@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UzAuto Motors - Rasmiy sayt</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+       <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: #fff;
+            color: #333;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .top-icons a {
+            color: #333;
+            margin-left: 15px;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        /* Hero Carousel */
+        .carousel-item {
+            height: calc(100vh - 70px);
+            background-color: #fff;
+            position: relative;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1;
+        }
+        
+        /* Content overlay */
+        .carousel-caption-custom {
+            position: absolute;
+            top: 18%;
+            left: 8%;
+            text-align: left;
+            z-index: 10;
+            max-width: 600px;
+        }
+        .brand-logos {
+            margin-bottom: 16px;
+        }
+        .brand-logos img {
+            height: 28px;
+            margin-right: 18px;
+        }
+        .title-main {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.1;
+        }
+        .subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        
+        /* Percent info */
+        .percent-info {
+            display: flex;
+            align-items: center;
+            margin-top: 16px;
+            margin-bottom: 24px;
+        }
+        .big-percent {
+            font-size: 6rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-right: 14px;
+        }
+        .percent-text {
+            font-size: 1.2rem;
+            line-height: 1.2;
+        }
+
+        /* Stats */
+        .stats-row {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 24px;
+        }
+        .stat-box {
+            display: flex;
+            flex-direction: column;
+        }
+        .stat-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #ccc;
+            margin-bottom: 4px;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+        }
+        .stat-value span {
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        /* Footer text on carousel */
+        .footer-text {
+            position: absolute;
+            bottom: 24px;
+            left: 8%;
+            font-size: 13px;
+            color: #ccc;
+            z-index: 10;
+            max-width: 80%;
+        }
+
+        /* Carousel controls */
+        .carousel-control-prev, .carousel-control-next {
+            width: 6%;
+            z-index: 20;
+        }
+        .carousel-indicators {
+            bottom: 8px;
+        }
+        .carousel-indicators [data-bs-target] {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 0 5px;
+            background-color: rgba(255,255,255,0.5);
+        }
+        .carousel-indicators .active {
+            background-color: #fff;
+        }
+
+        /* Cars carousel controls */
+        #carsCarousel .carousel-control-prev,
+        #carsCarousel .carousel-control-next {
+            align-items: flex-start;
+            padding-top: 12%;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 50px 0;
+            background-color: #fff;
+            color: #333;
+            text-align: center;
+        }
+        .service-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 14px auto;
+            font-size: 36px;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+        .service-icon:hover {
+            border-color: #f39c12;
+            color: #f39c12;
+            cursor: pointer;
+        }
+        .service-title {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Cars Grid Section */
+        .cars-section {
+            padding: 40px 0;
+            background-color: #fff;
+        }
+        .car-card {
+            border: 1px solid #ddd;
+            background: #fff;
+            color: #333;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        .car-card .img-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .car-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .discount-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: red;
+            color: white;
+            padding: 5px 14px;
+            font-weight: bold;
+            font-size: 12px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .discount-badge::before {
+            content: "\f02b";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+        .car-card-body {
+            padding: 18px;
+            text-align: left;
+        }
+        .car-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .car-discount-text {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 2px;
+        }
+        .car-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #d88100;
+            margin-bottom: 16px;
+        }
+        .btn-batafsil {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: transparent;
+            border: 1px solid #d88100;
+            color: #333;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .btn-batafsil:hover {
+            background-color: #f39c12;
+            color: white;
+            border-color: #f39c12;
+        }
+
+        /* Highlight Section */
+        .highlight-tabs .nav-link {
+            color: #333;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            border-bottom: 3px solid transparent;
+            padding: 10px 16px;
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+        .highlight-tabs .nav-link.active {
+            color: #000;
+            background-color: transparent;
+            border-bottom: 3px solid #d88100;
+        }
+        .highlight-tabs .nav-tabs {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+        .highlight-tabs .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        .highlight-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .highlight-img {
+            height: 360px;
+            object-fit: cover;
+        }
+        .highlight-info {
+            background-color: #a48259;
+            color: white;
+            padding: 32px 20px;
+            text-align: center;
+        }
+        .highlight-desc {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .highlight-title {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        .highlight-sub {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .highlight-buttons .btn {
+            border-radius: 4px;
+            font-size: 14px;
+            padding: 10px 24px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #f5f5f5;
+        }
+        .footer-title {
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        .footer-hr {
+            border-top: 2px solid #000;
+            opacity: 1;
+            margin-top: 6px;
+            margin-bottom: 14px;
+            width: 100%;
+        }
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            font-size: 13px;
+            line-height: 2.1;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #d88100;
+        }
+        .social-icons a {
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #aaa;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+            border-radius: 50%;
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            background-color: #d88100;
+        }
+
+        /* Split Features Section */
+        .split-feature {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .split-feature .img-box, .split-feature .text-box {
+            flex: 0 0 100%;
+            min-height: 320px;
+        }
+        @media (min-width: 768px) {
+            .split-feature .img-box, .split-feature .text-box {
+                flex: 0 0 50%;
+            }
+            .split-feature .text-box {
+                padding: 60px 40px;
+            }
+        }
+        .split-feature .img-box {
+            background-size: cover;
+            background-position: center;
+            min-height: 240px;
+        }
+        .split-feature .text-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 24px;
+            text-align: center;
+            color: white;
+        }
+        .split-feature.blue-bg .text-box {
+            background-color: #0078d4;
+        }
+        .split-feature.dark-blue-bg .text-box {
+            background-color: #113f6a;
+        }
+        .split-feature .title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .split-feature .subtitle {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .split-feature .desc {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            max-width: 600px;
+        }
+        .split-feature .btn-outline {
+            border: 1px solid rgba(255,255,255,0.5);
+            color: white;
+            background: transparent;
+            padding: 10px 36px;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .split-feature .btn-outline:hover {
+            background-color: white;
+            color: #333;
+        }
+
+        /* Offcanvas menu */
+        .offcanvas {
+            width: 280px !important;
+        }
+        .offcanvas-header {
+            padding: 16px 20px;
+        }
+        .offcanvas-body {
+            padding: 20px;
+        }
+        .offcanvas-body ul li a {
+            font-size: 18px;
+            padding: 10px 0;
+            display: block;
+        }
+
+        /* ============= MOBILE / TABLET OPTIMIZATIONS ============= */
+        @media (max-width: 991px) {
+            .navbar {
+                padding: 10px 16px;
+                align-items: center;
+            }
+            .navbar-brand {
+                font-size: 1.1rem;
+            }
+            .navbar-brand strong {
+                font-size: 1.15rem;
+            }
+            .top-icons a[data-bs-toggle="modal"] {
+                margin-left: 12px;
+            }
+            .top-icons {
+                gap: 6px;
+            }
+            .top-icons a {
+                font-size: 11px;
+            }
+            .top-icons .fs-5 {
+                font-size: 1.2rem !important;
+            }
+
+            /* Hero Carousel */
+            .carousel-item {
+                height: auto;
+                min-height: 100vh;
+                min-height: 100dvh;
+            }
+            .carousel-item img {
+                position: absolute;
+                inset: 0;
+                height: 100%;
+            }
+            .carousel-caption-custom {
+                position: relative;
+                top: auto;
+                left: auto;
+                padding: 100px 20px 80px;
+                text-align: center;
+                max-width: 100%;
+            }
+            .brand-logos {
+                justify-content: center;
+                display: flex;
+            }
+            .brand-logos img {
+                height: 22px;
+                margin-right: 12px;
+            }
+            .title-main {
+                font-size: 3rem;
+                letter-spacing: 1px;
+            }
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            .percent-info {
+                justify-content: center;
+            }
+            .big-percent {
+                font-size: 3.5rem;
+            }
+            .percent-text {
+                font-size: 1rem;
+            }
+            .stats-row {
+                justify-content: center;
+                gap: 24px;
+            }
+            .stat-title {
+                font-size: 11px;
+            }
+            .stat-value {
+                font-size: 1.5rem;
+                flex-direction: column;
+                align-items: center;
+                gap: 2px;
+            }
+            .stat-value span {
+                font-size: 12px;
+            }
+            .footer-text {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                margin-top: 20px;
+                text-align: center;
+                color: #bbb;
+                font-size: 13px;
+            }
+            .carousel-control-prev,
+            .carousel-control-next {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .title-main {
+                font-size: 2.5rem;
+            }
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            .big-percent {
+                font-size: 2.8rem;
+            }
+            .percent-text {
+                font-size: 0.9rem;
+            }
+            .stats-row {
+                flex-direction: column;
+                gap: 16px;
+                align-items: center;
+            }
+            .carousel-caption-custom {
+                padding: 80px 16px 60px;
+            }
+            .footer-text {
+                font-size: 12px;
+            }
+        }
+    
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container-fluid px-3 px-md-4">
+            
+            <!-- Left: Hamburger + Desktop Nav -->
+            <div class="d-flex align-items-center">
+                <button class="btn btn-link text-dark text-decoration-none p-0 me-3 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainMenuOffcanvas" aria-controls="mainMenuOffcanvas">
+                    <i class="fa-solid fa-bars fs-4"></i>
+                </button>
+                
+                <div class="d-none d-lg-flex align-items-center">
+                    <ul class="navbar-nav flex-row gap-3">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="avtoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Avtomobillar
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow-lg" aria-labelledby="avtoDropdown">
+                                <li><a class="dropdown-item py-2" href="#">Tahoe</a></li>
+                                <li><a class="dropdown-item py-2" href="#">Malibu</a></li>
+                                <li><a class="dropdown-item py-2" href="#">Equinox</a></li>
+                                <li><a class="dropdown-item py-2" href="#">Captiva</a></li>
+                                <li><a class="dropdown-item py-2" href="#">Tracker</a></li>
+                                <li><a class="dropdown-item py-2" href="#">Onix</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item py-2" href="#">Barcha modellar</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Dilerlar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Center Brand -->
+            <a class="navbar-brand position-absolute start-50 translate-middle-x" href="#">
+                <strong>UzAuto</strong> <span class="small align-top">MOTORS</span>
+                <span class="ms-1 text-warning"><i class="fa-solid fa-plus"></i></span>
+            </a>
+            
+            <!-- Right Icons -->
+            <div class="d-flex align-items-center top-icons ms-auto">
+                <a href="#" class="text-secondary text-decoration-none d-none d-sm-inline" style="font-size:12px; font-weight:bold;">RU</a>
+                <a href="#" class="text-dark border-bottom border-dark pb-1 ms-1 text-decoration-none d-none d-sm-inline" style="font-size:12px; font-weight:bold;">UZ</a>
+                <!-- Search Trigger -->
+                <a href="#" class="ms-2 ms-md-3 text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa-solid fa-magnifying-glass fs-5"></i></a>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                    <a href="{% url 'main:admin_panel' %}" class="ms-2 ms-md-3 text-white text-decoration-none" style="font-size: 12px; font-weight:600; background:#5512f3; padding:5px 10px; border-radius:4px;">
+                        <i class="fa-solid fa-shield-halved me-1"></i>Admin
+                    </a>
+                    {% endif %}
+                    <a href="{% url 'main:logout' %}" class="ms-2 ms-md-3 text-dark text-decoration-none border rounded px-2 py-1" style="font-size: 12px;">Chiqish</a>
+                {% else %}
+                <a href="{% url 'main:login' %}" class="ms-2 ms-md-3 text-dark text-decoration-none"><i class="fa-regular fa-user"></i> <span class="d-none d-sm-inline">Kirish</span></a>
+                <a href="{% url 'main:register' %}" class="ms-2 ms-md-3 text-dark text-decoration-none border rounded px-2 py-1" style="font-size: 12px;"><span class="d-none d-sm-inline">Ro'yxatdan o'tish</span><span class="d-sm-none">Ro'yxat</span></a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carousel -->
+    <div id="uzautoCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#uzautoCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#uzautoCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#uzautoCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+        <!-- Carousel Inner -->
+        <div class="carousel-inner">
+            
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+               
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/2023_Chevrolet_Captiva_Premier.png/1280px-2023_Chevrolet_Captiva_Premier.png" alt="Captiva">
+                <div class="carousel-caption-custom">
+                    <div class="brand-logos">
+                        <span class="fs-4 fw-bold fst-italic">CHEVROLET</span>
+                        <span class="fs-4 fw-bold ms-4"><i class="fa-solid fa-circle-notch"></i> SQB</span>
+                    </div>
+                    <h1 class="title-main">CAPTIVA</h1>
+                    <h3 class="subtitle">UCHUN MUDDATLI<br>TO'LOV<br>QULAY SHARTLAR BILAN</h3>
+                    
+                    <div class="percent-info">
+                        <div class="big-percent">0%</div>
+                        <div class="percent-text">Foiz stavkasi</div>
+                    </div>
+                    
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <div class="stat-title">Boshlang'ich to'lov:</div>
+                            <div class="stat-value">25% <span>dan<br>boshlab</span> &nbsp;&nbsp; 60% <span>gacha</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <div class="stat-title">Muddati:</div>
+                            <div class="stat-value">16 <span>oydan<br>boshlab</span> &nbsp;&nbsp; 36 <span>oygacha</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-text">
+                    Batafsil ma'lumot olish uchun "Mikrokreditbank" ATB rasmiy saytiga tashrif buyuring.
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Tahoe">
+                <div class="carousel-caption-custom">
+                    <div class="brand-logos">
+                        <span class="fs-4 fw-bold fst-italic">CHEVROLET</span>
+                    </div>
+                    <h1 class="title-main">TAHOE</h1>
+                    <h3 class="subtitle">PREMIUM KLASS<br>AVTOMOBILI</h3>
+                    
+                    <div class="percent-info">
+                        <div class="big-percent">10%</div>
+                        <div class="percent-text">Chegirma bilan</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Malibu">
+                <div class="carousel-caption-custom">
+                    <div class="brand-logos">
+                        <span class="fs-4 fw-bold fst-italic">CHEVROLET</span>
+                    </div>
+                    <h1 class="title-main">MALIBU</h1>
+                    <h3 class="subtitle">YANGICHA DIZAYN<br>YANGICHA QARASH</h3>
+                    
+                    <div class="percent-info">
+                        <div class="big-percent">5%</div>
+                        <div class="percent-text">Yillik kredit</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#uzautoCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 4rem; height: 4rem;"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#uzautoCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="width: 4rem; height: 4rem;"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Services Section -->
+    <div class="services-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <div class="service-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+                    <div class="service-title">Test drayv</div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="service-icon"><i class="fa-solid fa-tags"></i></div>
+                    <div class="service-title">Maxsus takliflar</div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="service-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="service-title">Dilerlar</div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="service-icon"><i class="fa-solid fa-car-side"></i></div>
+                    <div class="service-title">Onlayn xarid</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cars Carousel Section -->
+    <div id="carsCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="4000">
+        <!-- Dynamic carousel indicators -->
+        <div class="carousel-indicators">
+            {% for car in cars|slice:':9' %}
+            <button type="button" data-bs-target="#carsCarousel" data-bs-slide-to="{{ forloop.counter0|divisibleby:3|yesno:'0,' }}{{ forloop.counter0|add:'-1' }}"
+                {% if forloop.first %}class="active"{% endif %}></button>
+            {% endfor %}
+        </div>
+        <div class="carousel-inner">
+            {% for car in cars %}
+            {% if forloop.counter0|divisibleby:3 %}
+            {% if not forloop.first %}</div></div></div>{% endif %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="container"><div class="row">
+            {% endif %}
+                        <div class="col-md-4">
+                            <div class="car-card">
+                                <div class="img-container">
+                                    <img src="{{ car.image_url }}" alt="{{ car.name }}">
+                                    {% if car.has_discount %}
+                                    <div class="discount-badge">CHEGIRMA</div>
+                                    {% endif %}
+                                </div>
+                                <div class="car-card-body">
+                                    <h3 class="car-title">{{ car.name }}</h3>
+                                    <div class="car-discount-text">{{ car.discount_text }}</div>
+                                    <div class="car-price">{{ car.price }}</div>
+                                    <a href="#" class="btn-batafsil" data-bs-toggle="modal" data-bs-target="#carModal{{ car.id }}">Batafsil</a>
+                                </div>
+                            </div>
+                        </div>
+            {% if forloop.last %}</div></div></div>{% endif %}
+            {% empty %}
+            <div class="carousel-item active">
+                <div class="container">
+                    <div class="text-center py-5 text-muted">
+                        <i class="fa-solid fa-car fa-3x mb-3"></i>
+                        <p>Hozircha mashinalar qo'shilmagan</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Highlight Section (Dynamic from DB) -->
+    {% if highlights %}
+    <div class="highlight-section mt-5 mb-5">
+        <div class="container">
+            <!-- Tabs -->
+            <ul class="nav nav-tabs highlight-tabs border-0 mb-4" id="highlightTab" role="tablist">
+                {% for h in highlights %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {% if forloop.first %}active{% endif %}"
+                            id="htab-{{ h.id }}"
+                            data-bs-toggle="tab"
+                            data-bs-target="#hpane-{{ h.id }}"
+                            type="button" role="tab"
+                            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                        {{ h.tab_title }}
+                    </button>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="highlightTabContent">
+                {% for h in highlights %}
+                <div class="tab-pane fade {% if forloop.first %}show active{% endif %}"
+                     id="hpane-{{ h.id }}" role="tabpanel">
+                    <div class="highlight-card">
+                        <img src="{{ h.car.image_url }}" alt="{{ h.car.name }}" class="w-100 highlight-img">
+                        <div class="highlight-info">
+                            <p class="highlight-desc">{{ h.description }}</p>
+                            <h2 class="highlight-title">{{ h.car.name }}</h2>
+                            <p class="highlight-sub">{{ h.car.name }} – Barchasi u haqida</p>
+                            <div class="highlight-buttons mt-4">
+                                <button class="btn btn-outline-light px-5 py-2 me-3"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#carModal{{ h.car.id }}">Batafsil</button>
+                                <button class="btn btn-light px-5 py-2 text-dark fw-bold">Onlayn xarid</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Split Features Section -->
+    <div class="container-fluid p-0">
+        <!-- Row 1: Captiva -->
+        <div class="split-feature blue-bg">
+            <div class="img-box" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="text-box">
+                <div class="title">Chevrolet Captiva</div>
+                <div class="subtitle">Har bir sayohat uchun sizning mukammal hamrohingiz!</div>
+                <div class="desc">
+                    Chevrolet Captiva — bu kundalik qulaylik va uzoq safarlar uchun mo'ljallangan keng, texnologik SUV. Old g'ildirakdan tortish, turbomotor va silliq CVT uzatmalar qutisi bilan Captiva haydovchi uchun muvozanatli samaradorlik va boshqaruvni taqdim etadi. Model 5 yoki 7 o'rinli konfiguratsiyada taklif qilinadi — shahardagi hayot uchun ham, oilaviy sayohatlar uchun ham moslashuvchan. Jasur dizayn, ergonomik salon va zamonaviy funksiyalar har bir safarni oson va xavfsiz qiladi.
+                </div>
+                <a href="#" class="btn-outline">Batafsil</a>
+            </div>
+        </div>
+
+        <!-- Row 2: Equinox -->
+        <div class="split-feature dark-blue-bg flex-row-reverse flex-md-row">
+            <div class="text-box w-100">
+                <div class="title">Chevrolet Equinox</div>
+                <div class="subtitle">Masofani bosib o'tadigan ishonchlilik</div>
+                <div class="desc">
+                    Equinox 1 yilda ixcham suvlar orasida uzoq muddatli ishonchlilik uchun #2024 o'rinni egalladi J. D. quvvat. Bu shuni anglatadiki, siz uzoq vaqt davomida boradigan joyingizga erishish uchun Equinox-ga ishonishingiz mumkin.
+                </div>
+                <a href="#" class="btn-outline">Batafsil</a>
+            </div>
+            <div class="img-box w-100" style="background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+        </div>
+    </div>
+
+    <!-- Offcanvas Menu (3 lines) -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mainMenuOffcanvas" aria-labelledby="mainMenuOffcanvasLabel">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold" id="mainMenuOffcanvasLabel">Menyu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body text-dark">
+            <ul class="list-unstyled fs-5">
+                <li class="mb-3"><a href="#" class="text-dark text-decoration-none">Bosh sahifa</a></li>
+                <li class="mb-3"><a href="#" class="text-dark text-decoration-none">Modellar</a></li>
+                <li class="mb-3"><a href="#" class="text-dark text-decoration-none">Dilerlar markazlari</a></li>
+                <li class="mb-3"><a href="#" class="text-dark text-decoration-none">Kompaniya haqida</a></li>
+                <li class="mb-3"><a href="#" class="text-dark text-decoration-none">Yangiliklar</a></li>
+                <li class="mb-3"><a href="#" class="text-dark text-decoration-none">Aloqa</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-0 pb-4 px-4 text-dark">
+                    <h5 class="mb-3 fw-bold">Saytdan qidirish</h5>
+                    <div class="input-group">
+                        <input type="text" class="form-control rounded-start" placeholder="Nimani izlayapsiz?">
+                        <button class="btn btn-dark rounded-end" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Car Info Modals (Dynamic) -->
+    {% for car in cars %}
+    <div class="modal fade" id="carModal{{ car.id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark fw-bold">{{ car.name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-dark">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="{{ car.image_url }}" class="img-fluid rounded" alt="{{ car.name }}">
+                        </div>
+                        <div class="col-md-6">
+                            {% if car.has_discount %}
+                            <h4>Narxi: <span class="text-warning">{{ car.price }}</span></h4>
+                            <span class="badge bg-danger mb-2">{{ car.discount_text }}</span>
+                            {% else %}
+                            <h4>Narxi: <span class="text-warning">{{ car.price }}</span></h4>
+                            {% endif %}
+                            <p class="mt-3">{{ car.description }}</p>
+                            <ul class="list-unstyled mt-3">
+                                {% if car.engine %}<li><strong>Dvigatel:</strong> {{ car.engine }}</li>{% endif %}
+                                {% if car.power %}<li><strong>Quvvat:</strong> {{ car.power }}</li>{% endif %}
+                                {% if car.transmission %}<li><strong>Uzatma:</strong> {{ car.transmission }}</li>{% endif %}
+                            </ul>
+                            <button class="btn btn-warning mt-3 px-4">Xarid qilish</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+    <!-- Footer Section -->
+    <footer class="footer pt-5 pb-4 mt-5 border-top">
+        <div class="container-fluid px-5">
+            <div class="row">
+                <!-- AVTOMOBILLAR -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5 class="footer-title">AVTOMOBILLAR</h5>
+                    <hr class="footer-hr">
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled footer-links">
+                                <li><a href="#">Chevrolet Tahoe</a></li>
+                                <li><a href="#">Chevrolet Traverse</a></li>
+                                <li><a href="#">Chevrolet Tracker</a></li>
+                                <li><a href="#">Chevrolet Onix</a></li>
+                                <li><a href="#">Chevrolet Cobalt MCM</a></li>
+                                <li><a href="#">Chevrolet Labo</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled footer-links">
+                                <li><a href="#">Chevrolet Tahoe High Country</a></li>
+                                <li><a href="#">Chevrolet Captiva</a></li>
+                                <li><a href="#">Chevrolet Malibu XL</a></li>
+                                <li><a href="#">Chevrolet Cobalt</a></li>
+                                <li><a href="#">Chevrolet Damas</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MIJOZLAR UCHUN -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">MIJOZLAR UCHUN</h5>
+                    <hr class="footer-hr">
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Texnik reglament</a></li>
+                        <li><a href="#">Texnik xizmat qoidalari</a></li>
+                        <li><a href="#">Ehtiyot qismlar</a></li>
+                    </ul>
+                </div>
+
+                <!-- DILER -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">DILER</h5>
+                    <hr class="footer-hr">
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Ichki bozor</a></li>
+                        <li><a href="#">Ehtiyot qism dilerlari</a></li>
+                        <li><a href="#">Tashqi bozorlarda avtomobil distribyutorlari va dilerlari</a></li>
+                    </ul>
+                </div>
+
+                <!-- CHEVROLET HAQIDA -->
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="footer-title">CHEVROLET HAQIDA</h5>
+                    <hr class="footer-hr">
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">CHEVROLET tarixi</a></li>
+                        <li><a href="#">Doimiy beriladigan savollar</a></li>
+                        <li><a href="#">Kafolat davri</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="mt-4 mb-4">
+
+            <!-- Footer Bottom -->
+            <div class="row align-items-center">
+                <div class="col-md-4 text-start">
+                    <p class="mb-0 text-muted" style="font-size: 11px;">Sayt materiallaridan foydalanganda havolani ko'rsatishingiz kerak</p>
+                    <p class="mb-0 fw-bold" style="font-size: 12px;">&copy; 1996 - 2026 AJ «UZAUTO MOTORS»</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <p class="mb-2 text-muted fw-bold" style="font-size: 10px; letter-spacing: 1px;">BIZ BU YERDA!</p>
+                    <div class="social-icons">
+                        <a href="#" class="rounded-circle me-2"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="rounded-circle me-2"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="rounded-circle me-2"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="rounded-circle"><i class="fa-brands fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-end">
+                    <h5 class="fw-bold mb-0">Together let's drive</h5>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

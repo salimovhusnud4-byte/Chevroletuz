@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ro'yxatdan o'tish - UzAuto</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+        }
+        .split-layout {
+            display: flex;
+            height: 100vh;
+        }
+        .left-side {
+            flex: 1;
+            background-image: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); /* Splashing car placeholder */
+            background-size: cover;
+            background-position: center;
+        }
+        .right-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+            overflow-y: auto;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+        }
+        .brand-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .brand-logo img {
+            height: 50px;
+        }
+        .brand-logo span {
+            display: block;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+        h2 {
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+        .form-control {
+            border-radius: 0;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #f39c12;
+        }
+        .btn-custom {
+            width: 100%;
+            padding: 12px;
+            background-color: transparent;
+            border: 2px solid #f39c12;
+            color: #333;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .btn-custom:hover {
+            background-color: #f39c12;
+            color: #fff;
+        }
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .login-link a {
+            color: #f39c12;
+            text-decoration: none;
+            font-weight: 800;
+        }
+        .links-row {
+            display: flex;
+            justify-content: flex-start;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .links-row a {
+            color: #666;
+            text-decoration: underline;
+            font-size: 13px;
+        }
+        .bottom-logo {
+            margin-top: 30px;
+            font-size: 32px;
+            font-weight: 800;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        .bottom-logo span {
+            color: #f39c12;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 991px) {
+            .split-layout {
+                flex-direction: column;
+            }
+            .left-side {
+                display: none;
+            }
+            .right-side {
+                padding: 24px 16px;
+                min-height: 100vh;
+                min-height: 100dvh;
+            }
+            .form-container {
+                max-width: 100%;
+            }
+            .brand-logo {
+                margin-bottom: 24px;
+            }
+            .brand-logo svg {
+                width: 48px;
+                height: 24px;
+            }
+            .brand-logo span {
+                font-size: 18px;
+                letter-spacing: 1.5px;
+            }
+            h2 {
+                font-size: 19px;
+                margin-bottom: 20px;
+            }
+            .form-control {
+                padding: 14px 16px;
+                margin-bottom: 16px;
+                font-size: 16px;
+            }
+            .btn-custom {
+                padding: 14px;
+                font-size: 15px;
+                border-radius: 4px;
+                margin-top: 4px;
+            }
+            .login-link {
+                margin-top: 14px;
+                font-size: 14px;
+            }
+            .links-row {
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 28px;
+            }
+            .links-row a {
+                font-size: 14px;
+            }
+            .bottom-logo {
+                margin-top: 24px;
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .right-side {
+                padding: 16px 12px;
+            }
+            h2 {
+                font-size: 17px;
+            }
+            .form-control {
+                padding: 12px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="split-layout">
+    <div class="left-side">
+        <!-- Image background is set in CSS -->
+    </div>
+    <div class="right-side">
+        <div class="form-container">
+            <div class="brand-logo">
+                <svg width="60" height="30" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 50 L50 20 L150 20 L190 50 L150 80 L50 80 Z" fill="#D4AF37"/>
+                    <path d="M50 20 L150 20 L190 50 L150 80 L50 80 L10 50 Z" stroke="#B8860B" stroke-width="4"/>
+                </svg>
+                <span>CHEVROLET</span>
+            </div>
+            
+            <h2>MA'LUMOTLARINGIZNI KIRITING</h2>
+            
+            <form action="#" method="POST">
+                <input type="text" class="form-control" placeholder="F.I.SH.">
+                <input type="email" class="form-control" placeholder="Elektron manzil!">
+                <input type="password" class="form-control" placeholder="Parol">
+                <input type="password" class="form-control" placeholder="Parolni takror kiriting">
+                
+                <button type="submit" class="btn btn-custom">Yuborish</button>
+            </form>
+            
+            <div class="login-link">
+                Akkauntingiz bormi?! <a href="{% url 'main:login' %}">KIRISH</a>
+            </div>
+            
+            <div class="links-row">
+                <a href="{% url 'main:index' %}">Asosiy saytga qaytish</a>
+                <a href="#">Parolingizni unutdingizmi?!</a>
+            </div>
+            
+            <div class="bottom-logo">
+                FIND <span>NEW</span> ROADS™
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

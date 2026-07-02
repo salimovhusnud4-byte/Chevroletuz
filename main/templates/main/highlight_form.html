@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if action == 'add' %}Yangilik qo'shish{% else %}Yangilik tahrirlash{% endif %} - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+        .form-card {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .form-header { margin-bottom: 32px; }
+        .form-header h2 { font-weight: 800; font-size: 24px; color: #fff; margin-bottom: 6px; }
+        .form-header p { color: rgba(255,255,255,0.4); font-size: 14px; margin: 0; }
+        .form-label { color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .form-control, .form-select {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            color: #fff;
+            padding: 12px 16px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .form-control:focus, .form-select:focus {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(52,152,219,0.5);
+            color: #fff;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
+            outline: none;
+        }
+        .form-control::placeholder { color: rgba(255,255,255,0.2); }
+        .form-select option { background: #302b63; }
+        textarea.form-control { min-height: 110px; resize: vertical; }
+        .check-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .check-wrapper:hover { background: rgba(52,152,219,0.08); border-color: rgba(52,152,219,0.3); }
+        .form-check-input[type="checkbox"] {
+            width: 20px; height: 20px; border-radius: 6px; cursor: pointer;
+            background-color: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+        }
+        .form-check-input:checked { background-color: #3498db; border-color: #3498db; }
+        .form-check-label { color: rgba(255,255,255,0.8); font-size: 14px; font-weight: 500; cursor: pointer; }
+        .btn-submit {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border: none; color: white; padding: 14px 32px;
+            border-radius: 12px; font-size: 15px; font-weight: 700; width: 100%;
+            transition: all 0.2s; box-shadow: 0 4px 20px rgba(52,152,219,0.35); cursor: pointer;
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(52,152,219,0.45); }
+        .btn-back {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px;
+            margin-bottom: 24px; transition: color 0.2s;
+        }
+        .btn-back:hover { color: rgba(255,255,255,0.9); }
+        .section-divider { border-top: 1px solid rgba(255,255,255,0.08); margin: 24px 0; }
+        .section-title-sm { font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 600; margin-bottom: 16px; }
+
+        /* Car select preview */
+        .car-preview {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .car-preview img {
+            width: 80px;
+            height: 54px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 767px) {
+            body {
+                padding: 16px 12px;
+                align-items: flex-start;
+            }
+            .form-card {
+                padding: 24px 18px;
+                border-radius: 20px;
+                box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+            }
+            .form-header h2 {
+                font-size: 20px;
+            }
+            .form-header p {
+                font-size: 13px;
+            }
+            .form-label {
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+            .form-control, .form-select {
+                padding: 12px 14px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+            textarea.form-control {
+                min-height: 100px;
+            }
+            .btn-submit {
+                padding: 14px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+            .check-wrapper {
+                padding: 12px 14px;
+                gap: 10px;
+            }
+            .form-check-label {
+                font-size: 13px;
+            }
+            .car-preview {
+                padding: 10px;
+                gap: 10px;
+            }
+            .car-preview img {
+                width: 60px;
+                height: 40px;
+            }
+            #previewCarName {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <a href="{% url 'main:admin_panel' %}" class="btn-back">
+            <i class="fa-solid fa-arrow-left"></i> Orqaga qaytish
+        </a>
+        <div class="form-header">
+            <h2>
+                {% if action == 'add' %}
+                    <i class="fa-solid fa-newspaper me-2" style="color:#3498db;"></i>Yangilik Qo'shish
+                {% else %}
+                    <i class="fa-solid fa-pen-to-square me-2" style="color:#f39c12;"></i>Yangilik Tahrirlash
+                {% endif %}
+            </h2>
+            <p>Bosh sahifadagi "Yangiliklar" bo'limini boshqaring</p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="section-title-sm">Mashina tanlash</div>
+            <div class="mb-3">
+                <label class="form-label">Mashina *</label>
+                <select name="car" class="form-select" required id="carSelect" onchange="updatePreview()">
+                    <option value="">-- Mashina tanlang --</option>
+                    {% for c in cars %}
+                    <option value="{{ c.id }}"
+                            data-img="{{ c.image_url }}"
+                            data-name="{{ c.name }}"
+                            {% if highlight and highlight.car.id == c.id %}selected{% endif %}>
+                        {{ c.name }} — {{ c.price }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <div class="car-preview" id="carPreview" style="display:none;">
+                    <img id="previewCarImg" src="" alt="">
+                    <span id="previewCarName" style="color:#fff; font-weight:600; font-size:14px;"></span>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+            <div class="section-title-sm">Tab ma'lumotlari</div>
+            <div class="row g-3">
+                <div class="col-md-8">
+                    <label class="form-label">Tab nomi *</label>
+                    <input type="text" name="tab_title" class="form-control"
+                           placeholder="Masalan: Onix yoki Tracker"
+                           value="{% if highlight %}{{ highlight.tab_title }}{% endif %}" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Tartib raqami</label>
+                    <input type="number" name="order" class="form-control" min="0"
+                           value="{% if highlight %}{{ highlight.order }}{% else %}0{% endif %}">
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Tavsif *</label>
+                    <textarea name="description" class="form-control"
+                              placeholder="Bu mashina haqida qisqacha tavsif..." required>{% if highlight %}{{ highlight.description }}{% endif %}</textarea>
+                </div>
+            </div>
+
+            {% if action == 'edit' %}
+            <div class="section-divider"></div>
+            <label class="check-wrapper">
+                <input type="checkbox" name="is_active" class="form-check-input"
+                       {% if highlight.is_active %}checked{% endif %}>
+                <span class="form-check-label">
+                    <i class="fa-solid fa-eye me-2" style="color:#3498db;"></i>
+                    Saytda ko'rsatish (Faol)
+                </span>
+            </label>
+            {% endif %}
+
+            <div class="section-divider"></div>
+            <button type="submit" class="btn-submit">
+                {% if action == 'add' %}
+                    <i class="fa-solid fa-plus me-2"></i>Yangilik Bo'limi Qo'shish
+                {% else %}
+                    <i class="fa-solid fa-floppy-disk me-2"></i>O'zgarishlarni Saqlash
+                {% endif %}
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function updatePreview() {
+            const sel = document.getElementById('carSelect');
+            const opt = sel.options[sel.selectedIndex];
+            const preview = document.getElementById('carPreview');
+            if (opt && opt.value) {
+                document.getElementById('previewCarImg').src = opt.getAttribute('data-img');
+                document.getElementById('previewCarName').textContent = opt.getAttribute('data-name');
+                preview.style.display = 'flex';
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+        // On page load, show preview if car selected
+        window.addEventListener('load', updatePreview);
+    </script>
+</body>
+</html>

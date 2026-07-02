@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if action == 'add' %}Mashina qo'shish{% else %}Mashina tahrirlash{% endif %} - Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+        .form-card {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .form-header {
+            margin-bottom: 32px;
+        }
+        .form-header h2 {
+            font-weight: 800;
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .form-header p {
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+            margin: 0;
+        }
+        .form-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .form-control, .form-select {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            color: #fff;
+            padding: 12px 16px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .form-control:focus, .form-select:focus {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(243,156,18,0.5);
+            color: #fff;
+            box-shadow: 0 0 0 3px rgba(243,156,18,0.15);
+            outline: none;
+        }
+        .form-control::placeholder { color: rgba(255,255,255,0.2); }
+        textarea.form-control { min-height: 100px; resize: vertical; }
+
+        /* Image preview */
+        .img-preview-box {
+            width: 100%;
+            height: 160px;
+            border-radius: 12px;
+            border: 2px dashed rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: rgba(255,255,255,0.03);
+            margin-top: 10px;
+        }
+        .img-preview-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .img-preview-placeholder {
+            color: rgba(255,255,255,0.2);
+            text-align: center;
+        }
+
+        /* Checkbox */
+        .check-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .check-wrapper:hover {
+            background: rgba(243,156,18,0.08);
+            border-color: rgba(243,156,18,0.3);
+        }
+        .form-check-input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .form-check-input:checked {
+            background-color: #f39c12;
+            border-color: #f39c12;
+        }
+        .form-check-label {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* Buttons */
+        .btn-submit {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border: none;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            width: 100%;
+            transition: all 0.2s;
+            box-shadow: 0 4px 20px rgba(243,156,18,0.35);
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(243,156,18,0.45);
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 24px;
+            transition: color 0.2s;
+        }
+        .btn-back:hover { color: rgba(255,255,255,0.9); }
+        .section-divider {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            margin: 24px 0;
+        }
+        .section-title-sm {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 767px) {
+            body {
+                padding: 16px 12px;
+                align-items: flex-start;
+            }
+            .form-card {
+                padding: 24px 18px;
+                border-radius: 20px;
+                box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+            }
+            .form-header h2 {
+                font-size: 20px;
+            }
+            .form-header p {
+                font-size: 13px;
+            }
+            .form-label {
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+            .form-control, .form-select {
+                padding: 12px 14px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+            textarea.form-control {
+                min-height: 90px;
+            }
+            .img-preview-box {
+                height: 140px;
+                border-radius: 10px;
+            }
+            .btn-submit {
+                padding: 14px;
+                font-size: 15px;
+                border-radius: 10px;
+            }
+            .check-wrapper {
+                padding: 12px 14px;
+                gap: 10px;
+            }
+            .form-check-label {
+                font-size: 13px;
+            }
+            .car-preview {
+                padding: 10px;
+                gap: 10px;
+            }
+            .car-preview img {
+                width: 60px;
+                height: 40px;
+            }
+            #previewCarName {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <a href="{% url 'main:admin_panel' %}" class="btn-back">
+            <i class="fa-solid fa-arrow-left"></i> Orqaga qaytish
+        </a>
+        <div class="form-header">
+            <h2>
+                {% if action == 'add' %}
+                    <i class="fa-solid fa-circle-plus me-2" style="color:#f39c12;"></i>Mashina Qo'shish
+                {% else %}
+                    <i class="fa-solid fa-pen-to-square me-2" style="color:#3498db;"></i>Mashina Tahrirlash
+                {% endif %}
+            </h2>
+            <p>{% if action == 'add' %}Yangi mashina ma'lumotlarini kiriting{% else %}{{ car.name }} ma'lumotlarini tahrirlang{% endif %}</p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Basic Info -->
+            <div class="section-title-sm">Asosiy ma'lumotlar</div>
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="form-label">Mashina nomi *</label>
+                    <input type="text" name="name" class="form-control" placeholder="Masalan: Chevrolet Captiva"
+                           value="{% if car %}{{ car.name }}{% endif %}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Narxi *</label>
+                    <input type="text" name="price" class="form-control" placeholder="Masalan: 35 000 000 SO'M"
+                           value="{% if car %}{{ car.price }}{% endif %}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Chegirma matni</label>
+                    <input type="text" name="discount_text" class="form-control" placeholder="Masalan: 10% chegirma"
+                           value="{% if car %}{{ car.discount_text }}{% endif %}">
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+            <!-- Image -->
+            <div class="section-title-sm">Rasm</div>
+            <div class="row g-3">
+                <div class="col-12">
+                    <label class="form-label">Rasm URL manzili *</label>
+                    <input type="url" name="image_url" id="imageUrlInput" class="form-control"
+                           placeholder="https://example.com/car.jpg"
+                           value="{% if car %}{{ car.image_url }}{% endif %}" required
+                           oninput="previewImage(this.value)">
+                    <div class="img-preview-box" id="previewBox">
+                        {% if car and car.image_url %}
+                        <img src="{{ car.image_url }}" id="previewImg" alt="preview">
+                        {% else %}
+                        <div class="img-preview-placeholder" id="previewPlaceholder">
+                            <i class="fa-solid fa-image fa-2x mb-2"></i><br>
+                            <span style="font-size:13px;">URL kiriting</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+            <!-- Technical -->
+            <div class="section-title-sm">Texnik ma'lumotlar</div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Dvigatel</label>
+                    <input type="text" name="engine" class="form-control" placeholder="Masalan: 1.5L Turbo"
+                           value="{% if car %}{{ car.engine }}{% endif %}">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Quvvat</label>
+                    <input type="text" name="power" class="form-control" placeholder="Masalan: 160 ot kuchi"
+                           value="{% if car %}{{ car.power }}{% endif %}">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Uzatma</label>
+                    <input type="text" name="transmission" class="form-control" placeholder="Masalan: 6-pog'onali avtomat"
+                           value="{% if car %}{{ car.transmission }}{% endif %}">
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Tavsif</label>
+                    <textarea name="description" class="form-control"
+                              placeholder="Mashina haqida qisqacha ma'lumot...">{% if car %}{{ car.description }}{% endif %}</textarea>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+            <!-- Options -->
+            <div class="section-title-sm">Sozlamalar</div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="check-wrapper">
+                        <input type="checkbox" name="has_discount" class="form-check-input"
+                               {% if car and car.has_discount %}checked{% endif %}>
+                        <span class="form-check-label">
+                            <i class="fa-solid fa-tag me-2" style="color:#e74c3c;"></i>
+                            Chegirmada ko'rsatish
+                        </span>
+                    </label>
+                </div>
+                {% if action == 'edit' %}
+                <div class="col-md-6">
+                    <label class="check-wrapper">
+                        <input type="checkbox" name="is_active" class="form-check-input"
+                               {% if car.is_active %}checked{% endif %}>
+                        <span class="form-check-label">
+                            <i class="fa-solid fa-eye me-2" style="color:#27ae60;"></i>
+                            Saytda ko'rsatish (Faol)
+                        </span>
+                    </label>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="section-divider"></div>
+            <button type="submit" class="btn-submit">
+                {% if action == 'add' %}
+                    <i class="fa-solid fa-plus me-2"></i>Mashina Qo'shish
+                {% else %}
+                    <i class="fa-solid fa-floppy-disk me-2"></i>O'zgarishlarni Saqlash
+                {% endif %}
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function previewImage(url) {
+            const box = document.getElementById('previewBox');
+            const placeholder = document.getElementById('previewPlaceholder');
+            if (!url) {
+                box.innerHTML = '<div class="img-preview-placeholder"><i class="fa-solid fa-image fa-2x mb-2"></i><br><span style="font-size:13px;">URL kiriting</span></div>';
+                return;
+            }
+            let img = document.getElementById('previewImg');
+            if (!img) {
+                box.innerHTML = '<img id="previewImg" alt="preview" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">';
+                img = document.getElementById('previewImg');
+            }
+            img.src = url;
+            img.onerror = () => {
+                box.innerHTML = '<div class="img-preview-placeholder"><i class="fa-solid fa-triangle-exclamation fa-2x mb-2" style="color:#e74c3c;"></i><br><span style="font-size:13px;">Rasm topilmadi</span></div>';
+            };
+        }
+    </script>
+</body>
+</html>
