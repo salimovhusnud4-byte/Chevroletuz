@@ -17,6 +17,7 @@
             color: #333;
             margin: 0;
             padding: 0;
+            padding-top: 65px; /* Added for fixed-top navbar */
         }
 
         /* Navbar styles */
@@ -510,7 +511,7 @@
                 position: relative;
                 top: auto;
                 left: auto;
-                padding: 100px 20px 80px;
+                padding: 160px 20px 80px;
                 text-align: center;
                 max-width: 100%;
             }
@@ -588,7 +589,7 @@
                 align-items: center;
             }
             .carousel-caption-custom {
-                padding: 80px 16px 60px;
+                padding: 140px 16px 60px;
             }
             .footer-text {
                 font-size: 12px;
@@ -601,12 +602,12 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container-fluid px-3 px-md-4">
+    <nav class="navbar fixed-top bg-white">
+        <div class="container-fluid px-2 px-md-4 flex-nowrap">
             
             <!-- Left: Hamburger + Desktop Nav -->
             <div class="d-flex align-items-center">
-                <button class="btn btn-link text-dark text-decoration-none p-0 me-3 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainMenuOffcanvas" aria-controls="mainMenuOffcanvas">
+                <button class="btn btn-link text-dark text-decoration-none p-0 me-2 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainMenuOffcanvas" aria-controls="mainMenuOffcanvas">
                     <i class="fa-solid fa-bars fs-4"></i>
                 </button>
                 
@@ -635,17 +636,17 @@
             </div>
             
             <!-- Center Brand -->
-            <a class="navbar-brand position-absolute start-50 translate-middle-x" href="#">
+            <a class="navbar-brand text-center mx-auto" href="#" style="white-space: nowrap;">
                 <strong>UzAuto</strong> <span class="small align-top">MOTORS</span>
                 <span class="ms-1 text-warning"><i class="fa-solid fa-plus"></i></span>
             </a>
             
             <!-- Right Icons -->
-            <div class="d-flex align-items-center top-icons ms-auto">
+            <div class="d-flex align-items-center top-icons">
                 <a href="#" class="text-secondary text-decoration-none d-none d-sm-inline" style="font-size:12px; font-weight:bold;">RU</a>
                 <a href="#" class="text-dark border-bottom border-dark pb-1 ms-1 text-decoration-none d-none d-sm-inline" style="font-size:12px; font-weight:bold;">UZ</a>
                 <!-- Search Trigger -->
-                <a href="#" class="ms-2 ms-md-3 text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa-solid fa-magnifying-glass fs-5"></i></a>
+                <a href="#" class="ms-1 ms-md-3 text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fa-solid fa-magnifying-glass fs-5"></i></a>
                 {% if user.is_authenticated %}
                     {% if user.is_staff %}
                     <a href="{% url 'main:admin_panel' %}" class="ms-2 ms-md-3 text-white text-decoration-none" style="font-size: 12px; font-weight:600; background:#5512f3; padding:5px 10px; border-radius:4px;">
